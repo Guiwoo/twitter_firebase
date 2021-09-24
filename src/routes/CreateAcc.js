@@ -32,7 +32,6 @@ const ALink = styled(Link)`
 const CreateAcc = () => {
   const history = useHistory();
   const [authError, setAuthError] = useState("");
-  const [active, setActive] = useState(true);
   const {
     register,
     handleSubmit,
@@ -52,11 +51,6 @@ const CreateAcc = () => {
       history.push("/", displayName);
     }
   };
-  useEffect(() => {
-    if (touchedFields.email && touchedFields.password) {
-      setActive(false);
-    }
-  }, [touchedFields]);
   return (
     <Layout>
       <Title />
@@ -108,7 +102,7 @@ const CreateAcc = () => {
               placeholder="비밀번호 확인.."
             />
             {authError !== "" ? <ErrorMsg message={authError} /> : null}
-            <input type="submit" value="계정 만들기.!" disabled={active} />
+            <input type="submit" value="계정 만들기.!" />
           </form>
         </div>
       </TopBox>

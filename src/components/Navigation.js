@@ -132,7 +132,7 @@ const Navigation = ({ userObj, toggleDarkMode, darkMode, refreshUser }) => {
               />
               {userObj.displayName}'s' Profile
             </MyProfile>
-            <BtnLogout onClick={() => console.log("hi")}>Log out</BtnLogout>
+            <BtnLogout onClick={onLogoutClick}>Log out</BtnLogout>
           </div>
         </div>
       </Mybox>

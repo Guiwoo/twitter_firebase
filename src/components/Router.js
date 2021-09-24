@@ -7,6 +7,8 @@ import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 import myRoute from "../variables/routeName";
 import Navigation from "./Navigation";
+import { Helmet } from "react-helmet";
+import original from "assets/original.jpeg";
 
 const AppRouter = ({
   isLoggedIn,
@@ -16,7 +18,11 @@ const AppRouter = ({
   darkMode,
 }) => {
   return (
-    <Router>
+    <Router basename={"https://guiwoo.github.io/twitter_firebase/"}>
+      <Helmet>
+        <title>성투하세요..</title>
+        <link rel="canonical" href={original} />
+      </Helmet>
       {isLoggedIn && (
         <Navigation
           userObj={userObj}

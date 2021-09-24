@@ -78,7 +78,7 @@ const BottomBox = () => {
             size={"lg"}
             style={{ marginRight: "3px" }}
           />
-          <sapn>계정으로 시작하기</sapn>
+          <span>계정으로 시작하기</span>
         </GoogleLoginBox>
         <GithubLoginBox name="github" onClick={onSocialClick}>
           <FontAwesomeIcon
@@ -86,7 +86,7 @@ const BottomBox = () => {
             size={"lg"}
             style={{ marginRight: "3px" }}
           />
-          <sapn>계정으로 시작하기</sapn>
+          <span>계정으로 시작하기</span>
         </GithubLoginBox>
       </SocialLoginBox>
     </SBottomBox>
