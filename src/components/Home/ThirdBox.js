@@ -5,11 +5,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import getCoinData from "components/CoinApi";
 import { trimText } from "components/Shared";
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useState } from "react/cjs/react.development";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import myRoute from "variables/routeName";
 
 const Container = styled.div`
   display: flex;

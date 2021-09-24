@@ -3,9 +3,6 @@ import CoinGecko from "coingecko-api";
 const CoinGeckoClient = new CoinGecko();
 
 //3. Make calls
-const getCoinData = async () => {
-  const result = await CoinGeckoClient.coins.all();
-  return result;
-};
+const getCoinData = async () => await CoinGeckoClient.coins.all();
 
 export default getCoinData;

@@ -96,7 +96,6 @@ const Home = ({ userObj }) => {
     const previewFile = URL.createObjectURL(e.target.files[0]);
     setPreview(previewFile);
   };
-  console.log();
   return (
     <Container>
       <div style={{ width: "33%" }}></div>
