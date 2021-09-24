@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import CreateAcc from "routes/CreateAcc";
 import Missing from "routes/Missing";
 import Profile from "routes/Profile";
