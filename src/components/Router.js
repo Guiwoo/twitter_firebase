@@ -18,7 +18,7 @@ const AppRouter = ({
   darkMode,
 }) => {
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router basename={process.env.PUBLIC_URL + "/"}>
       <Helmet>
         <title>성투하세요..</title>
         <link rel="canonical" href={original} />
