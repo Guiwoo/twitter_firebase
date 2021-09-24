@@ -18,7 +18,7 @@ const AppRouter = ({
   darkMode,
 }) => {
   return (
-    <Router basename={"https://guiwoo.github.io/twitter_firebase/"}>
+    <Router basename={"https://guiwoo.github.io/twitter_firebase"}>
       <Helmet>
         <title>성투하세요..</title>
         <link rel="canonical" href={original} />
