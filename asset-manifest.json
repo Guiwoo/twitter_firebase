@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.js": "/twitter_firebase/static/js/main.bbeccf4d.chunk.js",
-    "main.js.map": "/twitter_firebase/static/js/main.bbeccf4d.chunk.js.map",
+    "main.js": "/twitter_firebase/static/js/main.344e729c.chunk.js",
+    "main.js.map": "/twitter_firebase/static/js/main.344e729c.chunk.js.map",
     "runtime-main.js": "/twitter_firebase/static/js/runtime-main.93e63574.js",
     "runtime-main.js.map": "/twitter_firebase/static/js/runtime-main.93e63574.js.map",
-    "static/js/2.15271b07.chunk.js": "/twitter_firebase/static/js/2.15271b07.chunk.js",
-    "static/js/2.15271b07.chunk.js.map": "/twitter_firebase/static/js/2.15271b07.chunk.js.map",
+    "static/js/2.1111b80d.chunk.js": "/twitter_firebase/static/js/2.1111b80d.chunk.js",
+    "static/js/2.1111b80d.chunk.js.map": "/twitter_firebase/static/js/2.1111b80d.chunk.js.map",
     "index.html": "/twitter_firebase/index.html",
-    "static/js/2.15271b07.chunk.js.LICENSE.txt": "/twitter_firebase/static/js/2.15271b07.chunk.js.LICENSE.txt",
+    "static/js/2.1111b80d.chunk.js.LICENSE.txt": "/twitter_firebase/static/js/2.1111b80d.chunk.js.LICENSE.txt",
     "static/media/twittMain.4bb92fc8.png": "/twitter_firebase/static/media/twittMain.4bb92fc8.png"
   },
   "entrypoints": [
     "static/js/runtime-main.93e63574.js",
-    "static/js/2.15271b07.chunk.js",
-    "static/js/main.bbeccf4d.chunk.js"
+    "static/js/2.1111b80d.chunk.js",
+    "static/js/main.344e729c.chunk.js"
   ]
 }
