@@ -17,11 +17,13 @@ const Container = styled.div`
   margin-bottom: 50px;
   padding: 20px 200px;
 `;
-const CenterBox = styled.div`
+const CenterBox = styled(Link)`
   cursor: pointer;
   width: 33%;
   display: flex;
   justify-content: center;
+  text-decoration: none;
+  color: ${(props) => props.theme.fontColor};
   &:hover {
     transform: scale(1.1);
   }
@@ -105,7 +107,7 @@ const Navigation = ({ userObj, toggleDarkMode, darkMode, refreshUser }) => {
       <div style={{ width: "33%" }}>
         <CoreTitle src={original} />
       </div>
-      <CenterBox onClick={() => history.push(myRoute.HOME)}>
+      <CenterBox to={myRoute.HOME}>
         <div>
           <MainImage src={mainImg} />
           <TheTitle>Show me your Fantasy ROE</TheTitle>
