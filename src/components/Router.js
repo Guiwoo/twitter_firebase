@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreateAcc from "routes/CreateAcc";
+import Missing from "routes/Missing";
 import Profile from "routes/Profile";
-import { birghtTheme, darkTheme } from "style/style";
-import { ThemeProvider } from "styled-components";
 import Auth from "../routes/Auth";
 import Home from "../routes/Home";
 import myRoute from "../variables/routeName";
@@ -23,6 +22,7 @@ const AppRouter = ({
           userObj={userObj}
           toggleDarkMode={toggleDarkMode}
           darkMode={darkMode}
+          refreshUser={refreshUser}
         />
       )}
       <Switch>
@@ -31,8 +31,13 @@ const AppRouter = ({
               <Route exact path={myRoute.HOME} key="home">
                 <Home userObj={userObj} />
               </Route>,
-              <Route exact path={myRoute.PROFILE} key="profile">
-                <Profile userObj={userObj} refreshUser={refreshUser} />
+              <Route
+                exact
+                path={myRoute.PROFILE}
+                key="profile"
+                refreshUser={refreshUser}
+              >
+                <Profile userObj={userObj} />
               </Route>,
             ]
           : [
@@ -43,6 +48,7 @@ const AppRouter = ({
                 <CreateAcc />
               </Route>,
             ]}
+        <Route component={Missing} />
       </Switch>
     </Router>
   );

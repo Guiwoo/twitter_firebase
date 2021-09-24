@@ -56,13 +56,11 @@ const BottomBox = () => {
     if (name === "google") {
       provider = new GoogleAuthProvider();
       const result = await signInWithPopup(authService, provider);
-      const credential = GoogleAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      await GoogleAuthProvider.credentialFromResult(result);
     } else if (name === "github") {
       provider = new GithubAuthProvider();
       const result = await signInWithPopup(authService, provider);
-      const credential = GithubAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
+      await GithubAuthProvider.credentialFromResult(result);
     }
   };
   return (

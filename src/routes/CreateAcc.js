@@ -37,7 +37,6 @@ const CreateAcc = () => {
     register,
     handleSubmit,
     formState: { errors, touchedFields },
-    formState,
   } = useForm();
   const onValid = async (data) => {
     const { email, password, password2, displayName } = data;
@@ -46,11 +45,7 @@ const CreateAcc = () => {
       return;
     }
     try {
-      const newAcc = await createUserWithEmailAndPassword(
-        authService,
-        email,
-        password
-      );
+      await createUserWithEmailAndPassword(authService, email, password);
     } catch (e) {
       console.log(e);
     } finally {
@@ -61,7 +56,7 @@ const CreateAcc = () => {
     if (touchedFields.email && touchedFields.password) {
       setActive(false);
     }
-  }, [formState]);
+  }, [touchedFields]);
   return (
     <Layout>
       <Title />

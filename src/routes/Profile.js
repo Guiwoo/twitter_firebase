@@ -6,25 +6,37 @@ import {
   query,
   where,
 } from "@firebase/firestore";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Container } from "components/Home/HomeShared";
+import { Btn } from "components/Shared";
 import { authService, dbService } from "fBase";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
+import styled from "styled-components";
+
+const SecondBox = styled.div`
+  display: flex;
+  justify-content: center;
+  border: 2px solid gold;
+  padding: 40px 40px;
+`;
+
+const TitleBox = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+`;
 
 const Profile = ({ userObj, refreshUser }) => {
   let updateName;
   const history = useHistory();
-  const { handleSubmit, setValue, register } = useForm({
+  const { handleSubmit, register } = useForm({
     defaultValues: {
       update: userObj.displayName,
     },
   });
-  const onLogoutClick = () => {
-    authService.signOut();
-    history.push("/");
-    refreshUser();
-  };
-
   const getMyTwitts = async () => {
     const q = query(
       collection(dbService, "twitt"),
@@ -46,21 +58,31 @@ const Profile = ({ userObj, refreshUser }) => {
 
   useEffect(() => {
     getMyTwitts();
-  }, []);
+  });
   useEffect(() => {}, [updateName]);
   return (
-    <div>
-      <span>Profile</span>
-      <form onSubmit={handleSubmit(onValid)}>
-        <input
-          {...register("update", { required: true })}
-          type="text"
-          placeholder="Edit Display Name"
-        />
-        <input type="submit" value="Edit Name" />
-      </form>
-      <button onClick={onLogoutClick}>Log out</button>
-    </div>
+    <Container>
+      <div style={{ width: "33%" }} />
+      <SecondBox>
+        <div>
+          <TitleBox>
+            <div>닉네임 수정</div>
+            <Btn style={{ marginLeft: "5px" }}>
+              <FontAwesomeIcon icon={faEdit} size="lg" />
+            </Btn>
+          </TitleBox>
+          <form onSubmit={handleSubmit(onValid)}>
+            <input
+              {...register("update", { required: true })}
+              type="text"
+              placeholder="Edit Display Name"
+            />
+            <input type="submit" value="수정하기" />
+          </form>
+        </div>
+      </SecondBox>
+      <div style={{ width: "33%" }} />
+    </Container>
   );
 };
 

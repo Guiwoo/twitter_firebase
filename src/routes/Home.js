@@ -12,63 +12,35 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router";
 import { updateProfile } from "@firebase/auth";
-import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBitcoin } from "@fortawesome/free-brands-svg-icons";
 import Preview from "components/Home/Preview";
 import { Btn } from "components/Shared";
-import { faCamera, faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
-
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-`;
-const FormBox = styled.form`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-`;
-const TwittInput = styled.input`
-  width: 100%;
-  padding: 5px 20px;
-  border: none;
-  border-bottom: 2px solid ${(props) => props.theme.fontColor};
-  margin-bottom: 3px;
-`;
-const FileInput = styled.input``;
-const TwittBtn = styled.button`
-  position: absolute;
-  right: -80px;
-  top: -1px;
-  color: ${(props) => props.theme.fontColor};
-  cursor: pointer;
-`;
-const TwittBox = styled.div`
-  margin: 30px 0px;
-  width: 400px;
-  border: 2px solid ${(props) => props.theme.gold};
-  position: relative;
-`;
-const TwittTitle = styled.div`
-  position: absolute;
-  background-color: ${(props) => props.theme.bgColor};
-  padding: 5px 10px;
-  top: -10px;
-  left: -10px;
-`;
+import {
+  Container,
+  FormBox,
+  TwittInput,
+  TwittBtn,
+  TwittTitle,
+  TwittBox,
+} from "components/Home/HomeShared";
+import SortBy from "components/Home/SortBy";
+import ThirdBox from "components/Home/ThirdBox";
 
 const Home = ({ userObj }) => {
   const { location } = useHistory();
   const [twittData, setTwittData] = useState([]);
   const [preview, setPreview] = useState(null);
   const { handleSubmit, register, setValue } = useForm();
+  const [sortLikes, setSortLikes] = useState(true);
   if (location.state !== "") {
     updateProfile(authService.currentUser, {
       displayName: location.state,
     });
   }
+  const onToggleSort = () => {
+    setSortLikes(!sortLikes);
+  };
   const onValid = async (data) => {
     const { twitt, file } = data;
     console.log(data);
@@ -76,16 +48,19 @@ const Home = ({ userObj }) => {
     if (file.length > 0) {
       const filePath = `${authService.currentUser.uid}//${file[0].name}`;
       const newImageRef = ref(storageService, filePath);
-      const fileSnapshot = await uploadBytesResumable(newImageRef, file[0]);
+      await uploadBytesResumable(newImageRef, file[0]);
       publicImageUrl = await getDownloadURL(newImageRef);
     }
     try {
-      const docRef = await addDoc(collection(dbService, "twitt"), {
+      await addDoc(collection(dbService, "twitt"), {
         text: twitt,
         createdAt: Date.now(),
         creatorId: userObj.uid,
         totalLikes: 0,
-        publicImageUrl,
+        ImageUrl: {
+          publicImageUrl,
+          isLikes: false,
+        },
       });
     } catch (e) {
       console.log(e);
@@ -110,17 +85,22 @@ const Home = ({ userObj }) => {
   useEffect(() => {
     const q = query(
       collection(dbService, "twitt"),
-      orderBy("createdAt", "desc")
+      orderBy(
+        !sortLikes ? "totalLikes" : "createdAt",
+        !sortLikes ? "desc" : "desc"
+      )
     );
     getResult(q);
-  }, []);
+  }, [sortLikes]);
   const fileOnChnage = (e) => {
     const previewFile = URL.createObjectURL(e.target.files[0]);
     setPreview(previewFile);
   };
+  console.log();
   return (
     <Container>
-      <div>
+      <div style={{ width: "33%" }}></div>
+      <div style={{ width: "33%", marginRight: "180px" }}>
         {preview ? (
           <>
             <Preview preview={preview} />
@@ -136,7 +116,7 @@ const Home = ({ userObj }) => {
             type="text"
             placeholder="당신의 최고의 수익률 을 남겨주세요...!"
           />
-          <FileInput
+          <input
             {...register("file")}
             type="file"
             accept="image/*"
@@ -148,6 +128,7 @@ const Home = ({ userObj }) => {
         </FormBox>
         <TwittBox>
           <TwittTitle>Twitt 💚</TwittTitle>
+          <SortBy onToggleSort={onToggleSort} sortLikes={sortLikes} />
           {twittData.map((t) => (
             <Twitt
               key={t.id}
@@ -157,6 +138,7 @@ const Home = ({ userObj }) => {
           ))}
         </TwittBox>
       </div>
+      <ThirdBox style={{ width: "33%" }} />
     </Container>
   );
 };

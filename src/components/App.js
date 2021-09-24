@@ -57,11 +57,4 @@ function App() {
     </>
   );
 }
-
-{
-  /* <footer style={{ display: "flex", justifyContent: "center" }}>
-        &copy; {new Date().getFullYear()} Guiwoo-Twitter{" "}
-      </footer> */
-}
-
 export default App;

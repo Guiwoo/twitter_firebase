@@ -1,4 +1,3 @@
-import React from "react";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
@@ -20,7 +19,6 @@ const GlobalStyle = createGlobalStyle`
   body{
     background-color: ${(props) => props.theme.bgColor};
     color: ${(props) => props.theme.fontColor};
-    padding: 20px 200px;
   }
 `;
 

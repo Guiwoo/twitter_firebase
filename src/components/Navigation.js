@@ -6,15 +6,16 @@ import original from "assets/original.jpeg";
 import mainImg from "assets/original.jpeg";
 import myRoute from "variables/routeName";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPersonBooth, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { Btn } from "./Shared";
+import { authService } from "fBase";
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 2px solid ${(props) => props.theme.fontColor};
-  padding: 10px 0px;
   margin-bottom: 50px;
-  width: 100%;
+  padding: 20px 200px;
 `;
 const CenterBox = styled.div`
   cursor: pointer;
@@ -34,7 +35,7 @@ const TheTitle = styled.div`
   font-family: "Bonheur Royale", cursive;
 `;
 const Mybox = styled.div`
-  margin-top: 20px;
+  margin-top: 15px;
   width: 33%;
   display: flex;
   justify-content: flex-end;
@@ -45,6 +46,7 @@ const MyProfile = styled(Link)`
   color: ${(props) => props.theme.fontColor};
   &:hover {
     transform: scale(1.1);
+    color: gold;
   }
 `;
 const OnOffDark = styled.div`
@@ -87,8 +89,17 @@ const InnerDiv = styled.button`
   }
 `;
 
-const Navigation = ({ userObj, toggleDarkMode, darkMode }) => {
+const BtnLogout = styled(Btn)`
+  margin-top: 5px;
+`;
+
+const Navigation = ({ userObj, toggleDarkMode, darkMode, refreshUser }) => {
   const history = useHistory();
+  const onLogoutClick = () => {
+    authService.signOut();
+    history.push("/");
+    refreshUser();
+  };
   return (
     <Container>
       <div style={{ width: "33%" }}>
@@ -112,14 +123,17 @@ const Navigation = ({ userObj, toggleDarkMode, darkMode }) => {
               </InnerDiv>
             </CheckBoxSection>
           </OnOffDark>
-          <MyProfile to={myRoute.PROFILE}>
-            <FontAwesomeIcon
-              style={{ marginRight: "5px" }}
-              icon={faUser}
-              size={"lg"}
-            />
-            {userObj.displayName}'s' Profile
-          </MyProfile>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <MyProfile to={myRoute.PROFILE}>
+              <FontAwesomeIcon
+                style={{ marginRight: "5px" }}
+                icon={faUser}
+                size={"lg"}
+              />
+              {userObj.displayName}'s' Profile
+            </MyProfile>
+            <BtnLogout onClick={() => console.log("hi")}>Log out</BtnLogout>
+          </div>
         </div>
       </Mybox>
     </Container>
