@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CreateAcc from "routes/CreateAcc";
 import Missing from "routes/Missing";
 import Profile from "routes/Profile";
@@ -18,7 +18,7 @@ const AppRouter = ({
   darkMode,
 }) => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Helmet>
         <title>성투하세요..</title>
         <link rel="canonical" href={original} />
