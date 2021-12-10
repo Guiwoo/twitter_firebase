@@ -23,7 +23,7 @@ const AppRouter = ({
         <title>성투하세요..</title>
         <link rel="canonical" href={original} />
       </Helmet>
-      {isLoggedIn && (
+      {!isLoggedIn && (
         <Navigation
           userObj={userObj}
           toggleDarkMode={toggleDarkMode}
@@ -32,7 +32,7 @@ const AppRouter = ({
         />
       )}
       <Switch>
-        {isLoggedIn
+        {!isLoggedIn
           ? [
               <Route exact path={myRoute.HOME} key="home">
                 <Home userObj={userObj} />
